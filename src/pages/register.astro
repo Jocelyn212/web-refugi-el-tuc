@@ -1,0 +1,175 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { checkAuth } from "../middleware.js";
+
+// Comprobamos si ya estamos autenticados
+const userData = await checkAuth(Astro.request);
+if (userData) {
+  return Astro.redirect("/admin");
+}
+
+// Verificamos si el acceso está permitido (URL con token secreto)
+const url = Astro.url;
+const secretToken = url.searchParams.get("secret");
+const REGISTRO_URL_SECRETO = import.meta.env.REGISTRO_URL_SECRETO;
+
+// Si no tiene el token secreto correcto, redirigimos
+if (!secretToken || secretToken !== REGISTRO_URL_SECRETO) {
+  return Astro.redirect("/");
+}
+---
+
+<Layout title="Registro - Refugio ElTuc">
+  <div
+    class="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8"
+  >
+    <div class="max-w-md w-full bg-white rounded-lg shadow-md p-8">
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-amber-600">Crear Cuenta</h1>
+        <p class="mt-2 text-gray-600">
+          Regístrate para acceder al panel de administración
+        </p>
+      </div>
+
+      <form id="registerForm" class="space-y-6">
+        <div>
+          <label for="username" class="block text-sm font-medium text-gray-700">
+            Nombre de usuario
+          </label>
+          <div class="mt-1">
+            <input
+              id="username"
+              name="username"
+              type="text"
+              required
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">
+            Contraseña
+          </label>
+          <div class="mt-1">
+            <input
+              id="password"
+              name="password"
+              type="password"
+              required
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label
+            for="confirmPassword"
+            class="block text-sm font-medium text-gray-700"
+          >
+            Confirmar Contraseña
+          </label>
+          <div class="mt-1">
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              required
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label
+            for="registrationCode"
+            class="block text-sm font-medium text-gray-700"
+          >
+            Código de Registro
+          </label>
+          <div class="mt-1">
+            <input
+              id="registrationCode"
+              name="registrationCode"
+              type="password"
+              required
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+            />
+          </div>
+        </div>
+
+        <div>
+          <button
+            type="submit"
+            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500"
+          >
+            Registrarse
+          </button>
+        </div>
+
+        <div id="errorMessage" class="text-red-500 text-center hidden"></div>
+      </form>
+
+      <div class="mt-6 text-center">
+        <p class="text-sm text-gray-600">
+          ¿Ya tienes una cuenta?
+          <a
+            href="/login?admin=true"
+            class="font-medium text-amber-600 hover:text-amber-500"
+          >
+            Inicia sesión aquí
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script is:inline>
+  // Manejador del formulario de registro
+  document
+    .getElementById("registerForm")
+    .addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const errorDiv = document.getElementById("errorMessage");
+      errorDiv.classList.add("hidden");
+
+      // Usar FormData para acceder a los valores del formulario
+      const formData = new FormData(e.target);
+      const username = formData.get("username");
+      const password = formData.get("password");
+      const confirmPassword = formData.get("confirmPassword");
+      const registrationCode = formData.get("registrationCode");
+
+      // Validación simple
+      if (password !== confirmPassword) {
+        errorDiv.textContent = "Las contraseñas no coinciden";
+        errorDiv.classList.remove("hidden");
+        return;
+      }
+
+      try {
+        const response = await fetch("/api/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password, registrationCode }),
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          // Redirigir al panel de administración
+          window.location.href = "/admin";
+        } else {
+          // Mostrar error
+          errorDiv.textContent = data.message || "Error al registrarse";
+          errorDiv.classList.remove("hidden");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        errorDiv.textContent = "Error de conexión. Intenta de nuevo más tarde.";
+        errorDiv.classList.remove("hidden");
+      }
+    });
+</script>

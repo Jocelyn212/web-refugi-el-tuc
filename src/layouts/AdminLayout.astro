@@ -1,0 +1,55 @@
+---
+/**
+ * Layout específico para páginas de administración
+ *
+ * Este layout se diferencia del Layout.astro público en que:
+ * - No incluye el NavBar público (para evitar confusión)
+ * - No incluye el Footer (innecesario en área admin)
+ * - Está optimizado para el flujo de trabajo administrativo
+ * - Mantiene la estructura HTML base y estilos globales
+ *
+ * Uso:
+ * - Solo para páginas dentro de /admin/
+ * - Se espera que las páginas incluyan su propio AdminNavBar
+ * - Diseñado para interfaces de gestión y administración
+ */
+
+import "../styles/global.css";
+
+// Props disponibles para el layout de administración
+const { title = "Panel Admin - Refugio ElTuc" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="Panel de administración - Refugio ElTuc"
+    />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen bg-gray-50">
+    <!-- Sin NavBar público - cada página admin incluye su AdminNavBar -->
+
+    <!-- Main Content (sin flex-grow ya que no hay footer) -->
+    <main class="min-h-screen">
+      <slot />
+    </main>
+
+    <!-- Sin Footer - no es necesario en área administrativa -->
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </body>
+</html>

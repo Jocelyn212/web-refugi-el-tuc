@@ -1,0 +1,387 @@
+---
+/**
+ * Página de configuración del sistema de administración
+ *
+ * Esta página permite a los administradores gestionar configuraciones
+ * básicas del refugio y del sistema. Incluye información general,
+ * configuraciones de contacto y opciones del sistema.
+ *
+ * Funcionalidades principales:
+ * - Configuración de información del refugio
+ * - Gestión de datos de contacto
+ * - Configuraciones del sistema
+ * - Información sobre la aplicación
+ *
+ * Dependencias principales:
+ * - AdminNavBar para navegación
+ * - Sistema de autenticación para verificar permisos de admin
+ */
+
+import AdminLayout from "../../layouts/AdminLayout.astro";
+import AdminNavBar from "../../components/AdminNavBar.astro";
+import { checkAuth } from "../../middleware.js";
+
+// Verificar autenticación de administrador
+const userData = await checkAuth(Astro.request);
+
+if (!userData) {
+  return Astro.redirect("/login");
+}
+---
+
+<AdminLayout title="Configuración - Admin | Refugio ElTuc">
+  <div class="bg-gray-50 min-h-screen">
+    <!-- Navbar de administración -->
+    <AdminNavBar />
+
+    <!-- Contenido principal -->
+    <div class="py-6">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Encabezado -->
+        <div class="mb-8">
+          <h1 class="text-3xl font-bold text-gray-900">
+            Configuración del Sistema
+          </h1>
+          <p class="mt-2 text-gray-600">
+            Gestiona las configuraciones principales del refugio y la aplicación
+          </p>
+        </div>
+
+        <!-- Información del refugio -->
+        <div class="space-y-6">
+          <!-- Información general -->
+          <div class="bg-white shadow-sm rounded-lg border border-gray-200">
+            <div class="px-6 py-4 border-b border-gray-200">
+              <h2 class="text-lg font-medium text-gray-900">
+                Información del Refugio
+              </h2>
+              <p class="text-sm text-gray-500">
+                Datos básicos del refugio ElTuc
+              </p>
+            </div>
+
+            <div class="px-6 py-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Información básica -->
+                <div class="space-y-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                      Nombre del Refugio
+                    </label>
+                    <div
+                      class="px-3 py-2 bg-gray-50 border border-gray-200 rounded-md text-sm text-gray-900"
+                    >
+                      Refugio ElTuc
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                      Ubicación
+                    </label>
+                    <div
+                      class="px-3 py-2 bg-gray-50 border border-gray-200 rounded-md text-sm text-gray-900"
+                    >
+                      El Pont de Vilomara, Barcelona, España
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                      Teléfono
+                    </label>
+                    <div
+                      class="px-3 py-2 bg-gray-50 border border-gray-200 rounded-md text-sm text-gray-900"
+                    >
+                      +54 381 XXX-XXXX
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Contacto y redes -->
+                <div class="space-y-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                      Email de Contacto
+                    </label>
+                    <div
+                      class="px-3 py-2 bg-gray-50 border border-gray-200 rounded-md text-sm text-gray-900"
+                    >
+                      contacto@refugioeltuc.org
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                      Sitio Web
+                    </label>
+                    <div
+                      class="px-3 py-2 bg-gray-50 border border-gray-200 rounded-md text-sm text-gray-900"
+                    >
+                      www.refugioeltuc.org
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                      Redes Sociales
+                    </label>
+                    <div
+                      class="px-3 py-2 bg-gray-50 border border-gray-200 rounded-md text-sm text-gray-900"
+                    >
+                      @refugioeltuc
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Descripción -->
+              <div class="mt-6">
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Descripción del Refugio
+                </label>
+                <div
+                  class="px-3 py-2 bg-gray-50 border border-gray-200 rounded-md text-sm text-gray-900"
+                >
+                  Refugio ElTuc es una organización sin fines de lucro dedicada
+                  al rescate, cuidado y búsqueda de hogares para animales
+                  abandonados y maltratados. Trabajamos con amor y
+                  dedicación para darles una segunda oportunidad a estos seres
+                  especiales.
+                </div>
+              </div>
+
+              <div class="mt-4 text-xs text-gray-500">
+                💡 Para modificar esta información, contacta al desarrollador
+                del sistema.
+              </div>
+            </div>
+          </div>
+
+          <!-- Estadísticas del sistema -->
+          <div class="bg-white shadow-sm rounded-lg border border-gray-200">
+            <div class="px-6 py-4 border-b border-gray-200">
+              <h2 class="text-lg font-medium text-gray-900">
+                Estadísticas del Sistema
+              </h2>
+              <p class="text-sm text-gray-500">Información técnica y de uso</p>
+            </div>
+
+            <div class="px-6 py-6">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Version de la aplicación -->
+                <div class="text-center">
+                  <div class="bg-blue-50 rounded-lg p-4">
+                    <div class="text-2xl font-bold text-blue-600">v1.0</div>
+                    <div class="text-sm text-gray-600 mt-1">
+                      Versión del Sistema
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tecnologías -->
+                <div class="text-center">
+                  <div class="bg-purple-50 rounded-lg p-4">
+                    <div class="text-2xl font-bold text-purple-600">
+                      Astro + JS
+                    </div>
+                    <div class="text-sm text-gray-600 mt-1">Framework Base</div>
+                  </div>
+                </div>
+
+                <!-- Base de datos -->
+                <div class="text-center">
+                  <div class="bg-green-50 rounded-lg p-4">
+                    <div class="text-2xl font-bold text-green-600">MongoDB</div>
+                    <div class="text-sm text-gray-600 mt-1">Base de Datos</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Información técnica adicional -->
+              <div class="mt-6 bg-gray-50 rounded-lg p-4">
+                <h3 class="text-sm font-medium text-gray-900 mb-3">
+                  Información Técnica
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <span class="font-medium text-gray-700">Deployment:</span>
+                    <span class="text-gray-600 ml-1">Vercel</span>
+                  </div>
+                  <div>
+                    <span class="font-medium text-gray-700">CDN:</span>
+                    <span class="text-gray-600 ml-1">Vercel Edge Network</span>
+                  </div>
+                  <div>
+                    <span class="font-medium text-gray-700">Estilo:</span>
+                    <span class="text-gray-600 ml-1">Tailwind CSS</span>
+                  </div>
+                  <div>
+                    <span class="font-medium text-gray-700">Autenticación:</span
+                    >
+                    <span class="text-gray-600 ml-1">JWT + bcryptjs</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mantenimiento y soporte -->
+          <div class="bg-white shadow-sm rounded-lg border border-gray-200">
+            <div class="px-6 py-4 border-b border-gray-200">
+              <h2 class="text-lg font-medium text-gray-900">
+                Mantenimiento y Soporte
+              </h2>
+              <p class="text-sm text-gray-500">
+                Opciones de sistema y contacto técnico
+              </p>
+            </div>
+
+            <div class="px-6 py-6">
+              <div class="space-y-4">
+                <!-- Estado del sistema -->
+                <div
+                  class="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200"
+                >
+                  <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                      <div class="h-3 w-3 bg-green-400 rounded-full"></div>
+                    </div>
+                    <div class="ml-3">
+                      <p class="text-sm font-medium text-green-800">
+                        Sistema Operativo
+                      </p>
+                      <p class="text-xs text-green-600">
+                        Todos los servicios funcionando correctamente
+                      </p>
+                    </div>
+                  </div>
+                  <div class="text-xs text-green-600">
+                    Última verificación: hace 2 minutos
+                  </div>
+                </div>
+
+                <!-- Acciones de mantenimiento -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <!-- Respaldar datos -->
+                  <div class="border border-gray-200 rounded-lg p-4">
+                    <h3 class="text-sm font-medium text-gray-900 mb-2">
+                      Respaldo de Datos
+                    </h3>
+                    <p class="text-xs text-gray-600 mb-3">
+                      Los datos se respaldan automáticamente en MongoDB Atlas
+                    </p>
+                    <div class="text-xs text-blue-600 font-medium">
+                      ✅ Respaldo automático activo
+                    </div>
+                  </div>
+
+                  <!-- Logs del sistema -->
+                  <div class="border border-gray-200 rounded-lg p-4">
+                    <h3 class="text-sm font-medium text-gray-900 mb-2">
+                      Logs del Sistema
+                    </h3>
+                    <p class="text-xs text-gray-600 mb-3">
+                      Monitoreo disponible en Vercel Dashboard
+                    </p>
+                    <a
+                      href="https://vercel.com/dashboard"
+                      target="_blank"
+                      class="text-xs text-fuchsia-600 hover:text-fuchsia-700 font-medium"
+                    >
+                      🔗 Ver Dashboard →
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Contacto de soporte -->
+                <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                  <h3 class="text-sm font-medium text-blue-900 mb-2">
+                    Soporte Técnico
+                  </h3>
+                  <p class="text-xs text-blue-700 mb-2">
+                    Para asistencia técnica, reportar bugs o solicitar nuevas
+                    funcionalidades:
+                  </p>
+                  <div class="text-xs text-blue-600">
+                    📧 Email: soporte.tecnico@refugioeltuc.org<br />
+                    💬 Reportar problema: GitHub Issues<br />
+                    📞 Urgencias: +54 381 XXX-XXXX
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Información sobre el proyecto -->
+          <div class="bg-white shadow-sm rounded-lg border border-gray-200">
+            <div class="px-6 py-4 border-b border-gray-200">
+              <h2 class="text-lg font-medium text-gray-900">
+                Acerca del Proyecto
+              </h2>
+              <p class="text-sm text-gray-500">
+                Información sobre el desarrollo del sistema
+              </p>
+            </div>
+
+            <div class="px-6 py-6">
+              <div class="prose prose-sm max-w-none text-gray-600">
+                <p>
+                  Este sistema fue desarrollado específicamente para <strong
+                    >Refugio ElTuc</strong
+                  >
+                  utilizando tecnologías modernas y estándares de seguridad actuales.
+                </p>
+
+                <h4 class="text-gray-900 font-medium mt-4 mb-2">
+                  Características principales:
+                </h4>
+                <ul class="text-sm space-y-1">
+                  <li>✅ Gestión completa de animales del refugio</li>
+                  <li>✅ Sistema de autenticación seguro</li>
+                  <li>✅ Panel administrativo completo</li>
+                  <li>✅ Diseño responsive para móviles</li>
+                  <li>✅ Base de datos en la nube</li>
+                  <li>✅ Despliegue automático</li>
+                </ul>
+
+                <h4 class="text-gray-900 font-medium mt-4 mb-2">
+                  Tecnologías utilizadas:
+                </h4>
+                <div class="flex flex-wrap gap-2 text-xs">
+                  <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded"
+                    >Astro</span
+                  >
+                  <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded"
+                    >JavaScript</span
+                  >
+                  <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded"
+                    >Tailwind CSS</span
+                  >
+                  <span class="bg-green-100 text-green-800 px-2 py-1 rounded"
+                    >MongoDB</span
+                  >
+                  <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded"
+                    >Mongoose</span
+                  >
+                  <span class="bg-black text-white px-2 py-1 rounded"
+                    >Vercel</span
+                  >
+                </div>
+
+                <div class="mt-4 text-xs text-gray-500 border-t pt-4">
+                  <p>
+                    💝 Desarrollado con amor para ayudar a los animales de
+                    Tucumán<br />
+                    🛠️ Sistema en constante mejora y actualización<br />
+                    📚 Documentación completa incluida en el código fuente
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</AdminLayout>

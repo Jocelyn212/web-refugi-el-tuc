@@ -1,0 +1,132 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { checkAuth } from "../middleware.js";
+
+// Comprobamos si ya estamos autenticados
+const userData = await checkAuth(Astro.request);
+if (userData) {
+  return Astro.redirect("/admin");
+}
+
+// Verificamos si el acceso está permitido (URL especial o referrer interno)
+const url = Astro.url;
+const adminParam = url.searchParams.get("admin");
+const referer = Astro.request.headers.get("referer");
+
+// Permitir acceso si:
+// 1. Tiene el parámetro admin=true en la URL
+// 2. Viene de una página interna del sitio (como el registro)
+const isInternalReferrer =
+  referer && new URL(referer).hostname === url.hostname;
+
+// Si no cumple las condiciones de acceso, redirigimos
+if (!adminParam && !isInternalReferrer) {
+  return Astro.redirect("/");
+}
+---
+
+<Layout title="Iniciar Sesión - Refugio ElTuc">
+  <div
+    class="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8"
+  >
+    <div class="max-w-md w-full bg-white rounded-lg shadow-md p-8">
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-amber-600">Iniciar Sesión</h1>
+        <p class="mt-2 text-gray-600">Acceso al panel de administración</p>
+      </div>
+
+      <form id="loginForm" class="space-y-6">
+        <div>
+          <label for="username" class="block text-sm font-medium text-gray-700">
+            Nombre de usuario
+          </label>
+          <div class="mt-1">
+            <input
+              id="username"
+              name="username"
+              type="text"
+              required
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">
+            Contraseña
+          </label>
+          <div class="mt-1">
+            <input
+              id="password"
+              name="password"
+              type="password"
+              required
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+            />
+          </div>
+        </div>
+
+        <div>
+          <button
+            type="submit"
+            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500"
+          >
+            Iniciar Sesión
+          </button>
+        </div>
+
+        <div id="errorMessage" class="text-red-500 text-center hidden"></div>
+      </form>
+
+      <div class="mt-6 text-center">
+        <p class="text-sm text-gray-600">
+          ¿No tienes una cuenta?
+          <a
+            href="/register"
+            class="font-medium text-amber-600 hover:text-amber-500"
+          >
+            Regístrate aquí
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script is:inline>
+  // Manejador del formulario de login
+  document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const errorDiv = document.getElementById("errorMessage");
+    errorDiv.classList.add("hidden");
+
+    // En Astro, es mejor usar el FormData para acceder a los datos del formulario
+    const formData = new FormData(e.target);
+    const username = formData.get("username");
+    const password = formData.get("password");
+
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Redirigir al panel de administración
+        window.location.href = "/admin";
+      } else {
+        // Mostrar error
+        errorDiv.textContent = data.message || "Error al iniciar sesión";
+        errorDiv.classList.remove("hidden");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      errorDiv.textContent = "Error de conexión. Intenta de nuevo más tarde.";
+      errorDiv.classList.remove("hidden");
+    }
+  });
+</script>

@@ -1,0 +1,211 @@
+---
+import "../styles/global.css";
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Refugio</title>
+  </head>
+  <body class="font-sans">
+    <slot />
+  </body>
+</html>
+
+<section class="w-full bg-gray-300">
+  <div class="slider-container relative w-full h-[65vh] overflow-hidden">
+    <!-- Slide 1 -->
+    <div class="slide active absolute top-0 left-0 w-full h-full opacity-100 transition-opacity duration-700 z-10">
+      <img src="src/assets/images/jack.jpg" alt="Refugio de animales" class="w-full h-full object-cover" />
+      <div class="absolute top-0 left-0 w-full h-full bg-black/15 z-30"></div>
+      <div class="absolute bottom-8 left-8 z-40">
+        <a href="/colabora" class="inline-block bg-green-700 hover:bg-green-800 text-white px-6 py-2 rounded-lg shadow-md transition font-medium">
+          Colaborar
+        </a>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-700 z-10">
+      <img src="src/assets/images/dog.jpg" alt="Animales rescatados" class="w-full h-full object-cover" />
+      <div class="absolute top-0 left-0 w-full h-full bg-black/15 z-30"></div>
+      <div class="absolute bottom-8 left-8 z-40">
+        <a href="/colabora" class="inline-block bg-green-700 hover:bg-green-800 text-white px-6 py-2 rounded-lg shadow-md transition font-medium">
+          Colaborar
+        </a>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-700 z-10">
+      <img src="src/assets/images/cat.jpg" alt="Refugio animal" class="w-full h-full object-cover" />
+      <div class="absolute top-0 left-0 w-full h-full bg-black/15 z-30"></div>
+      <div class="absolute bottom-8 left-8 z-40">
+        <a href="/colabora" class="inline-block bg-green-700 hover:bg-green-800 text-white px-6 py-2 rounded-lg shadow-md transition font-medium">
+          Colaborar
+        </a>
+      </div>
+    </div>
+
+    <!-- Indicadores -->
+    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-50">
+      <button class="indicator active w-2 h-2 rounded-full bg-gray-700 border-0 cursor-pointer transition-all hover:bg-gray-600" data-slide="0" aria-label="Ir a slide 1"></button>
+      <button class="indicator w-2 h-2 rounded-full bg-gray-400 border-0 cursor-pointer transition-all hover:bg-gray-500" data-slide="1" aria-label="Ir a slide 2"></button>
+      <button class="indicator w-2 h-2 rounded-full bg-gray-400 border-0 cursor-pointer transition-all hover:bg-gray-500" data-slide="2" aria-label="Ir a slide 3"></button>
+    </div>
+  </div>
+</section>
+
+<!-- Sección de colaboración -->
+<section class="bg-white py-12 px-4">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <!-- Columna izquierda -->
+      <div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">Colabora con nosotras</h2>
+        <p class="text-gray-600 mb-8">Desde 1 euro al mes con la plataforma Teaming</p>
+        
+        <div class="text-center mb-8">
+          <img src="src/assets/images/teaming-horitzontal.jpg" alt="Teaming Logo" class="w-52 h-auto mx-auto" />
+        </div>
+
+        <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+          <h3 class="font-bold text-gray-900 mb-4 text-sm">HAZTE SOCIO O REALIZA UNA DONACIÓN PUNTUAL</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">
+            La Fundación Altarriba está acogida a la Ley 49/2002, de 23 de diciembre, 
+            de Régimen Fiscal de las Entidades sin Fines Lucrativos y de los Incentivos 
+            Fiscales al Mecenazgo; por lo que las donaciones a nuestra entidad por 
+            cualquier concepto, incluyendo el apadrinamiento se benefician de 
+            desgravaciones fiscales y fiscales del IRPF.
+          </p>
+        </div>
+      </div>
+
+      <!-- Columna derecha -->
+      <div>
+        <div class="mb-8">
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Esto lo traigo de aquí porque me ha gustado, 
+            <a href="https://www.altarriba.org/" target="_blank" rel="noopener" class="text-green-700 hover:text-green-800 underline font-medium transition">
+              https://www.altarriba.org/
+            </a>
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-6">
+          <!-- Donación puntual -->
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="font-bold text-gray-900 mb-4 text-sm">Donación puntual: Cuenta Bancaria:</h3>
+            <div class="flex flex-col gap-2">
+              <p class="text-gray-800 text-sm break-all">ES63 2100 3006 9822 0072 0991 CaixaBank</p>
+              <p class="text-xs text-gray-600">(Los donativos en España desgravan hasta un 80%)</p>
+            </div>
+          </div>
+
+          <!-- Bizum -->
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="font-bold text-gray-900 mb-4 text-sm">BIZUM código entidad 08567</h3>
+            <button class="copy-bizum flex items-center gap-2 bg-transparent border-0 text-green-700 hover:text-green-800 font-semibold text-sm cursor-pointer transition p-0">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+              </svg>
+              <span class="copy-text-bizum">Copiar código</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+  const indicators = document.querySelectorAll('.indicator');
+  const totalSlides = 3;
+  let autoplayInterval: ReturnType<typeof setInterval>;
+
+  function showSlide(index: number) {
+    slides.forEach((slide, i) => {
+      if (i === index) {
+        slide.classList.add('active', 'opacity-100', 'z-20');
+        slide.classList.remove('opacity-0');
+      } else {
+        slide.classList.remove('active', 'opacity-100', 'z-20');
+        slide.classList.add('opacity-0');
+      }
+    });
+
+    indicators.forEach((indicator, i) => {
+      if (i === index) {
+        indicator.classList.remove('bg-gray-400', 'scale-100');
+        indicator.classList.add('active', 'bg-gray-700', 'scale-125');
+      } else {
+        indicator.classList.remove('active', 'bg-gray-700', 'scale-125');
+        indicator.classList.add('bg-gray-400', 'scale-100');
+      }
+    });
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
+  }
+
+  function startAutoplay() {
+    autoplayInterval = setInterval(nextSlide, 4000);
+  }
+
+  function stopAutoplay() {
+    clearInterval(autoplayInterval);
+  }
+
+  // Event listeners para indicadores
+  indicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => {
+      stopAutoplay();
+      currentSlide = index;
+      showSlide(currentSlide);
+      startAutoplay();
+    });
+  });
+
+  // Bizum 
+  const copyBizum = document.querySelector('.copy-bizum');
+  if (copyBizum) {
+    copyBizum.addEventListener('click', async () => {
+      const bizum = '08567';
+      const copyText = copyBizum.querySelector('.copy-text-bizum');
+      
+      try {
+        await navigator.clipboard.writeText(bizum);
+        if (copyText) {
+          const originalText = copyText.textContent;
+          copyText.textContent = '¡Copiado!';
+          setTimeout(() => {
+            copyText.textContent = originalText;
+          }, 2000);
+        }
+      } catch (err) {
+        console.error('Error al copiar:', err);
+      }
+    });
+  }
+
+  // Start autoplay
+  startAutoplay();
+
+  // Pause autoplay on hover
+  const sliderContainer = document.querySelector('.slider-container');
+  if (sliderContainer) {
+    sliderContainer.addEventListener('mouseenter', stopAutoplay);
+    sliderContainer.addEventListener('mouseleave', startAutoplay);
+  }
+</script>
+
+<style>
+  .indicator.scale-125 {
+    transform: scale(1.25);
+  }
+</style>

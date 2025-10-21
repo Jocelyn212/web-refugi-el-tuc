@@ -1,5 +1,9 @@
 ---
 import '../styles/global.css'
+import NavBar from "../components/NavBar.astro";
+import Footer from "../components/Footer.astro";
+// Props disponibles para el layout
+const { title = "Refugio ElTuc - Adopta un amigo" } = Astro.props;
 --- 
 
 <!doctype html>
@@ -9,10 +13,12 @@ import '../styles/global.css'
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title}</title>
 	</head>
 	<body>
+		<NavBar />
 		<slot />
+		<Footer />
 	</body>
 </html>
 

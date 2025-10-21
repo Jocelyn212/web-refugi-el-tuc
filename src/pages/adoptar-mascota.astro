@@ -1,0 +1,506 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// Obtener el ID del animal desde los parámetros de la URL
+const id = Astro.url.searchParams.get("id");
+
+// Variables para almacenar los datos del animal y posibles errores
+let animal: any = null;
+let error: string | null = null;
+let formSubmitted = false;
+let formSuccess = false;
+let formError = "";
+
+// Obtener información del animal específico
+try {
+  if (id) {
+    const baseUrl = Astro.url.origin;
+    const apiUrl = `${baseUrl}/api/animals?id=${id}`;
+
+    const res = await fetch(apiUrl, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Error ${res.status}: ${res.statusText}`);
+    }
+
+    const result = await res.json();
+    animal = result.success ? result.data : null;
+  } else {
+    error = "No se especificó un ID de animal válido";
+  }
+} catch (e: any) {
+  error = e.message;
+}
+
+// Procesar el formulario de adopción si se envía
+if (Astro.request.method === "POST") {
+  try {
+    formSubmitted = true;
+
+    const formData = await Astro.request.formData();
+    const nombre = formData.get("nombre");
+    const email = formData.get("email");
+    const telefono = formData.get("telefono");
+    const mensaje = formData.get("mensaje");
+
+    // Aquí se enviaría esta información a una API o servicio para procesar la solicitud de adopción
+    // Por ahora, simulamos una respuesta exitosa
+
+    if (!nombre || !email || !telefono) {
+      formError = "Por favor, complete todos los campos obligatorios";
+      formSuccess = false;
+    } else {
+      // Simular éxito - en un caso real se enviaría a un endpoint
+      formSuccess = true;
+    }
+  } catch (e) {
+    formError = e.message;
+    formSuccess = false;
+  }
+}
+---
+
+<Layout>
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    {/* Navegación */}
+    <nav class="flex mb-8" aria-label="Breadcrumb">
+      <ol class="inline-flex items-center space-x-1 md:space-x-3">
+        <li class="inline-flex items-center">
+          <a
+            href="/"
+            class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600"
+          >
+            <svg
+              class="w-3 h-3 mr-2.5"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"
+              ></path>
+            </svg>
+            Inicio
+          </a>
+        </li>
+        <li>
+          <div class="flex items-center">
+            <svg
+              class="w-3 h-3 text-gray-400 mx-1"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 9 4-4-4-4"></path>
+            </svg>
+            <a
+              href="/animales"
+              class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2"
+              >Animales</a
+            >
+          </div>
+        </li>
+        <li aria-current="page">
+          <div class="flex items-center">
+            <svg
+              class="w-3 h-3 text-gray-400 mx-1"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 9 4-4-4-4"></path>
+            </svg>
+            <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2"
+              >Adopción</span
+            >
+          </div>
+        </li>
+      </ol>
+    </nav>
+
+    {/* Mensaje de error si existe */}
+    {
+      error && (
+        <div class="bg-red-50 border-l-4 border-red-400 p-4 mb-8 rounded-md">
+          <div class="flex">
+            <div class="flex shrink-0">
+              <svg
+                class="h-5 w-5 text-red-400"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+            <div class="ml-3">
+              <h3 class="text-sm font-medium text-red-800">Error</h3>
+              <p class="text-sm text-red-700 mt-1">{error}</p>
+              <a
+                href="/animales"
+                class="mt-3 inline-flex items-center text-sm text-blue-600 hover:underline"
+              >
+                <svg
+                  class="w-4 h-4 mr-1"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                Volver a la lista de animales
+              </a>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    {/* Contenido principal cuando hay un animal */}
+    {
+      animal && (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {/* Columna izquierda - Información del animal */}
+          <div>
+            <div class="relative rounded-2xl overflow-hidden mb-6">
+              <img
+                class="w-full h-[400px] object-cover"
+                src={
+                  animal.photoUrl ||
+                  "https://via.placeholder.com/600x400?text=Sin+Imagen"
+                }
+                alt={`Foto de ${animal.name}`}
+                onerror="this.src='https://via.placeholder.com/600x400?text=Sin+Imagen'"
+              />
+              <div class="absolute top-0 right-0 bg-blue-600 text-white py-1 px-4 m-4 rounded-full text-sm font-medium">
+                {animal.status}
+              </div>
+            </div>
+
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">{animal.name}</h1>
+            <div class="flex items-center gap-3 mb-6">
+              <span class="inline-block px-3 py-1 text-sm font-medium rounded-full bg-blue-100 text-blue-800">
+                {animal.species}
+              </span>
+              {animal.breed && (
+                <span class="inline-block px-3 py-1 text-sm font-medium rounded-full bg-gray-100 text-gray-800">
+                  {animal.breed}
+                </span>
+              )}
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mb-6">
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <h3 class="text-sm font-semibold text-gray-500 mb-1">Edad</h3>
+                <p class="text-gray-900">
+                  {animal.age ? `${animal.age} años` : "Desconocida"}
+                </p>
+              </div>
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <h3 class="text-sm font-semibold text-gray-500 mb-1">Género</h3>
+                <p class="text-gray-900">{animal.gender || "Desconocido"}</p>
+              </div>
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <h3 class="text-sm font-semibold text-gray-500 mb-1">Tamaño</h3>
+                <p class="text-gray-900">{animal.size || "No especificado"}</p>
+              </div>
+              {/* Eliminamos la fecha de ingreso porque no refleja realmente cuándo llegó el animal al refugio */}
+            </div>
+
+            <div class="mb-8">
+              <h2 class="text-xl font-semibold text-gray-800 mb-3">
+                Sobre {animal.name}
+              </h2>
+              <p class="text-gray-700 whitespace-pre-line">
+                {animal.description}
+              </p>
+            </div>
+
+            {animal.healthInfo && (
+              <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-3">
+                  Información de salud
+                </h2>
+                <div class="bg-blue-50 p-4 rounded-lg">
+                  <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li>
+                      {animal.healthInfo.vaccinated
+                        ? "Vacunado/a"
+                        : "No vacunado/a"}
+                    </li>
+                    <li>
+                      {animal.healthInfo.sterilized
+                        ? "Esterilizado/a"
+                        : "No esterilizado/a"}
+                    </li>
+                    <li>
+                      {animal.healthInfo.dewormed
+                        ? "Desparasitado/a"
+                        : "No desparasitado/a"}
+                    </li>
+                    {animal.healthInfo.additionalInfo && (
+                      <li>
+                        Información adicional:{" "}
+                        {animal.healthInfo.additionalInfo}
+                      </li>
+                    )}
+                  </ul>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Columna derecha - Formulario de adopción */}
+          <div>
+            {!formSuccess ? (
+              <>
+                <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6 mb-6">
+                  <h2 class="text-2xl font-bold text-gray-800 mb-4">
+                    Solicitar adopción
+                  </h2>
+                  <p class="text-gray-600 mb-6">
+                    Complete el formulario para iniciar el proceso de adopción.
+                    Nos pondremos en contacto con usted a la brevedad.
+                  </p>
+
+                  {formSubmitted && formError && (
+                    <div class="bg-red-50 border border-red-200 text-red-800 rounded-md p-4 mb-6">
+                      <div class="flex">
+                        <svg
+                          class="h-5 w-5 text-red-400 mr-2"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                        <span>{formError}</span>
+                      </div>
+                    </div>
+                  )}
+
+                  <form method="POST" class="space-y-4">
+                    <input type="hidden" name="animalId" value={animal._id} />
+
+                    <div>
+                      <label
+                        for="nombre"
+                        class="block text-sm font-medium text-gray-700 mb-1"
+                      >
+                        Nombre completo *
+                      </label>
+                      <input
+                        type="text"
+                        name="nombre"
+                        id="nombre"
+                        required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      />
+                    </div>
+
+                    <div>
+                      <label
+                        for="email"
+                        class="block text-sm font-medium text-gray-700 mb-1"
+                      >
+                        Correo electrónico *
+                      </label>
+                      <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      />
+                    </div>
+
+                    <div>
+                      <label
+                        for="telefono"
+                        class="block text-sm font-medium text-gray-700 mb-1"
+                      >
+                        Teléfono *
+                      </label>
+                      <input
+                        type="tel"
+                        name="telefono"
+                        id="telefono"
+                        required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      />
+                    </div>
+
+                    <div>
+                      <label
+                        for="mensaje"
+                        class="block text-sm font-medium text-gray-700 mb-1"
+                      >
+                        ¿Por qué quiere adoptar a {animal.name}?
+                      </label>
+                      <textarea
+                        name="mensaje"
+                        id="mensaje"
+                        rows="4"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      class="w-full bg-amber-500 hover:bg-amber-600 text-white font-medium py-3 px-6 rounded-lg transition duration-200 flex items-center justify-center"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 mr-2"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                        />
+                      </svg>
+                      Enviar solicitud de adopción
+                    </button>
+                  </form>
+                </div>
+
+                <div class="bg-blue-50 rounded-xl border border-blue-100 p-6">
+                  <h3 class="text-lg font-semibold text-blue-800 mb-3">
+                    Proceso de adopción
+                  </h3>
+                  <ol class="list-decimal list-inside text-gray-700 space-y-3">
+                    <li>Complete el formulario de adopción.</li>
+                    <li>
+                      Evaluaremos su solicitud y nos pondremos en contacto.
+                    </li>
+                    <li>
+                      Si es preseleccionado/a, programaremos una visita al
+                      refugio.
+                    </li>
+                    <li>
+                      Conozca a {animal.name} y complete la documentación
+                      necesaria.
+                    </li>
+                    <li>¡Lleve a {animal.name} a su nuevo hogar!</li>
+                  </ol>
+                </div>
+              </>
+            ) : (
+              <div class="bg-green-50 border border-green-100 rounded-xl p-8 text-center">
+                <div class="mb-4 flex justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-16 w-16 text-green-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-green-800 mb-4">
+                  ¡Solicitud enviada con éxito!
+                </h2>
+                <p class="text-green-700 mb-6">
+                  Hemos recibido su solicitud para adoptar a {animal.name}. Un
+                  miembro de nuestro equipo se pondrá en contacto con usted a la
+                  brevedad para continuar con el proceso.
+                </p>
+                <a
+                  href="/animales"
+                  class="inline-flex items-center text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                >
+                  <svg
+                    class="w-4 h-4 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                    />
+                  </svg>
+                  Ver más animales
+                </a>
+              </div>
+            )}
+          </div>
+        </div>
+      )
+    }
+  </main>
+</Layout>
+
+<style>
+  /* Animación para los botones */
+  button[type="submit"],
+  a.bg-blue-600 {
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  button[type="submit"]:hover,
+  a.bg-blue-600:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Animación para la imagen */
+  img {
+    transition: transform 0.5s ease;
+  }
+
+  .relative:hover img {
+    transform: scale(1.02);
+  }
+
+  /* Mejorar los inputs del formulario */
+  input:focus,
+  textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  }
+</style>
