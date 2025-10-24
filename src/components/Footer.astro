@@ -1,50 +1,122 @@
 ---
-// El footer no necesita props específicos por ahora
+// Footer del Refugi El Tuc con información actualizada
 ---
 
-<footer class="bg-gray-800 text-white py-8">
+<footer class="text-white py-12" style="background: linear-gradient(135deg, #8A2451 0%, #4A1A2E 50%, #1a1a1a 100%);">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <!-- About -->
-      <div>
-        <h3 class="text-lg font-semibold mb-4 text-pink-500">Sobre Nosotros</h3>
-        <p class="text-gray-300">
-          Refugio ElTuc es una asociación sin ánimo de lucro dedicada al rescate
-          y adopción de animales abandonados.
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      
+      <!-- Logo y About -->
+      <div class="md:col-span-2">
+        <div class="flex items-center mb-4">
+          <img 
+            src="/LogoRefugiElTuc.png" 
+            alt="Logo Refugi El Tuc" 
+            class="h-12 w-12 object-contain mr-3"
+          >
+          <h3 class="text-2xl font-roboto-serif font-bold">Refugi El Tuc</h3>
+        </div>
+        <p class="text-white font-roboto leading-relaxed mb-4">
+          Som una associació sense ànim de lucre i ens dediquem a l'acollida de gossos abandonats 
+          dins el municipi del Pont de Vilomara i Rocafort.
+        </p>
+        <p class="text-white font-roboto text-sm">
+          🐾 Promovem l'adopció responsable i el benestar animal
         </p>
       </div>
 
-      <!-- Contact -->
+      <!-- Contacto -->
       <div>
-        <h3 class="text-lg font-semibold mb-4 text-fuchsia-500">Contacto</h3>
-        <ul class="text-gray-300 space-y-2">
-          <li>📍 Calle Ejemplo, 123</li>
-          <li>📱 +34 600 000 000</li>
-          <li>✉️ info@refugioeltuc.org</li>
+        <h3 class="text-lg font-roboto-serif font-semibold mb-4 text-white">
+          Contacte
+        </h3>
+        <ul class="text-white space-y-3 font-roboto">
+          <li class="flex items-start">
+            <span class="text-lg mr-2">📍</span>
+            <div>
+              <p class="text-sm">Diseminado Can Martinet, 2</p>
+              <p class="text-sm">08254 El Pont de Vilomara</p>
+              <p class="text-sm">Barcelona</p>
+            </div>
+          </li>
+          <li class="flex items-center">
+            <span class="text-lg mr-2">📱</span>
+            <a href="tel:687874795" class="text-white hover:underline transition-all duration-200">
+              687 874 795
+            </a>
+          </li>
+          <li class="flex items-center">
+            <span class="text-lg mr-2">✉️</span>
+            <a href="mailto:eltuc.refugi@gmail.com" class="text-white hover:underline transition-all duration-200">
+              eltuc.refugi@gmail.com
+            </a>
+          </li>
         </ul>
       </div>
 
-      <!-- Links -->
+      <!-- Horarios y Enlaces -->
       <div>
-        <h3 class="text-lg font-semibold mb-4 text-amber-200">Enlaces</h3>
-        <ul class="text-gray-300 space-y-2">
+        <h3 class="text-lg font-roboto-serif font-semibold mb-4 text-white">
+          Horaris
+        </h3>
+        <div class="text-white space-y-2 font-roboto text-sm mb-6">
+          <div class="flex justify-between">
+            <span>Dilluns - Divendres</span>
+            <span>8:00 - 20:00</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Dissabte</span>
+            <span>9:00 - 19:00</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Diumenge</span>
+            <span>9:00 - 21:00</span>
+          </div>
+        </div>
+        
+        <h4 class="text-md font-roboto-serif font-semibold mb-3 text-white">
+          Enllaços
+        </h4>
+        <ul class="text-white space-y-2 font-roboto">
           <li>
-            <a href="/adopta" class="hover:text-amber-200">Adopta</a>
+            <a href="/adopta" class="text-white hover:underline transition-all duration-200">
+              🐕 Adopta
+            </a>
           </li>
           <li>
-            <a href="/colabora" class="hover:text-amber-200">Colabora</a>
+            <a href="/colabora" class="text-white hover:underline transition-all duration-200">
+              💖 Colabora
+            </a>
           </li>
           <li>
-            <a href="/contacto" class="hover:text-amber-200">Contacto</a>
+            <a href="/contacto" class="text-white hover:underline transition-all duration-200">
+              📞 Contacte
+            </a>
           </li>
         </ul>
       </div>
     </div>
 
-    <div class="border-t border-gray-700 mt-8 pt-6 text-center">
-      <p class="text-gray-400">
-        © {new Date().getFullYear()} Refugio ElTuc. Todos los derechos reservados.
-      </p>
+    <!-- Información bancaria y copyright -->
+    <div class="border-t mt-8 pt-8" style="border-color: #B85C7A;">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <div>
+          <h4 class="text-sm font-roboto-serif font-semibold mb-2 text-white">
+            💰 Donacions - Banc Sabadell
+          </h4>
+          <p class="text-white font-mono text-sm">
+            ES57 0081 0179 6900 0140 3948
+          </p>
+        </div>
+        <div class="text-center md:text-right">
+          <p class="text-white font-roboto text-sm">
+            © {new Date().getFullYear()} Refugi El Tuc. Tots els drets reservats.
+          </p>
+          <p class="text-white font-roboto text-xs mt-1 opacity-80">
+            Associació sense ànim de lucre
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </footer>

@@ -2,11 +2,364 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Contacto - Refugio ElTuc">
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="text-center mb-12">
-      <h1 class="text-4xl font-bold text-gray-900 mb-4">Contacto</h1>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto">Yo soy contacto</p>
+<Layout title="Contactanos - Refugio ElTuc">
+  <main
+    class="min-h-screen bg-linear-to-br relative overflow-hidden"
+    style="background: linear-gradient(135deg, #f8f4f6 0%, #f0e8ec 100%);"
+  >
+    <!-- Patitas decorativas de fondo -->
+    <div class="absolute inset-0 opacity-10 pointer-events-none">
+      <div
+        class="absolute top-10 left-10 text-8xl transform rotate-12"
+        style="color: #8A2451;"
+      >
+        🐾
+      </div>
+      <div
+        class="absolute top-32 right-20 text-6xl transform -rotate-12"
+        style="color: #B85C7A;"
+      >
+        🐾
+      </div>
+      <div
+        class="absolute bottom-32 right-10 text-8xl transform -rotate-45"
+        style="color: #D4849A;"
+      >
+        🐾
+      </div>
+      <div
+        class="absolute bottom-64 left-16 text-6xl transform rotate-12"
+        style="color: #8A2451;"
+      >
+        🐾
+      </div>
+      <div
+        class="absolute top-1/2 right-1/4 text-7xl transform -rotate-30"
+        style="color: #B85C7A;"
+      >
+        🐾
+      </div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <!-- Título principal -->
+      <div class="text-center mb-16">
+        <h1
+          class="text-5xl lg:text-6xl font-roboto-serif font-bold mb-6"
+          style="color: #8A2451;"
+        >
+          CONTACTANOS
+        </h1>
+        <div class="w-24 h-1 mx-auto mb-8" style="background-color: #B85C7A;">
+        </div>
+        <p
+          class="text-lg lg:text-xl text-gray-700 leading-relaxed font-roboto max-w-3xl mx-auto"
+        >
+          Estamos aquí para ayudarte. Ponte en contacto con nosotros para
+          adopciones, voluntariado o cualquier consulta sobre nuestros animales.
+        </p>
+      </div>
+
+      <!-- Grid de información de contacto -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+        <!-- DIRECCIÓN -->
+        <div
+          class="rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center"
+          style="background-color: #E8C8D4;"
+        >
+          <div class="text-4xl mb-4" style="color: #8A2451;">📍</div>
+          <h3
+            class="text-2xl font-roboto-serif font-semibold text-gray-800 mb-4"
+          >
+            DIRECCIÓN
+          </h3>
+          <div class="text-gray-700 font-roboto leading-relaxed">
+            <p class="mb-2"><strong>Diseminado Can Martinet, 2</strong></p>
+            <p class="mb-2">08254 Barcelona</p>
+            <p>El Pont de Vilomara</p>
+          </div>
+        </div>
+
+        <!-- CONTACTO -->
+        <div
+          class="rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center"
+          style="background-color: #E8C8D4;"
+        >
+          <div class="text-4xl mb-4" style="color: #8A2451;">📞</div>
+          <h3
+            class="text-2xl font-roboto-serif font-semibold text-gray-800 mb-4"
+          >
+            CONTACTO
+          </h3>
+          <div class="text-gray-700 font-roboto leading-relaxed">
+            <p class="mb-4">
+              <a
+                href="tel:687874795"
+                class="hover:underline transition-all duration-200"
+                style="color: #8A2451;"
+              >
+                <strong>687 874 795</strong>
+              </a>
+            </p>
+            <p>
+              <a
+                href="mailto:eltuc.refugi@gmail.com"
+                class="hover:underline transition-all duration-200"
+                style="color: #8A2451;"
+              >
+                <strong>eltuc.refugi@gmail.com</strong>
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <!-- HORARIOS -->
+        <div
+          class="rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center"
+          style="background-color: #E8C8D4;"
+        >
+          <div class="text-4xl mb-4" style="color: #8A2451;">🕐</div>
+          <h3
+            class="text-2xl font-roboto-serif font-semibold text-gray-800 mb-4"
+          >
+            HORARIOS
+          </h3>
+          <div class="text-gray-700 font-roboto leading-relaxed space-y-2">
+            <div class="flex justify-between items-center">
+              <span><strong>Mon - Fri</strong></span>
+              <span>8:00 am – 8:00 pm</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span><strong>Saturday</strong></span>
+              <span>9:00 am – 7:00 pm</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span><strong>Sunday</strong></span>
+              <span>9:00 am – 9:00 pm</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mapa integrado -->
+      <div class="mb-16">
+        <div
+          class="rounded-2xl overflow-hidden shadow-2xl border-4 border-white"
+        >
+          <div class="bg-white p-4 text-center">
+            <h3
+              class="text-2xl font-roboto-serif font-semibold"
+              style="color: #8A2451;"
+            >
+              📍 Encuéntranos aquí
+            </h3>
+          </div>
+          <div class="relative">
+            <iframe
+              src="https://maps.google.com/maps?q=41.70845,1.87215+(Refugi%20El%20Tuc%20-%20Diseminado%20Can%20Martinet%202)&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              width="100%"
+              height="400"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              class="w-full"
+              title="Mapa de ubicación del Refugi El Tuc"
+            >
+            </iframe>
+
+            <!-- Botón para abrir en Google Maps si no carga el iframe -->
+            <div class="absolute bottom-4 right-4">
+              <a
+                href="https://www.google.com/maps/search/41.70845,1.87215"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-white font-roboto-serif font-medium py-2 px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center"
+                style="background-color: #8A2451;"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4 mr-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  ></path>
+                </svg>
+                Ver en Google Maps
+              </a>
+            </div>
+
+            <!-- Overlay con información del refugio en el mapa -->
+            <div
+              class="absolute top-4 left-4 p-4 rounded-lg shadow-lg bg-white/95 backdrop-blur-sm"
+            >
+              <h4
+                class="font-roboto-serif font-semibold text-lg mb-2"
+                style="color: #8A2451;"
+              >
+                REFUGI EL TUC
+              </h4>
+              <p class="text-sm text-gray-600 font-roboto">
+                Diseminado Can Martinet, 2<br />
+                El Pont de Vilomara i Rocafort
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formas de contacto directo -->
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h3
+            class="text-3xl font-roboto-serif font-bold mb-6"
+            style="color: #8A2451;"
+          >
+            💬 ¿Cómo contactarnos?
+          </h3>
+          <p
+            class="text-lg text-gray-700 font-roboto leading-relaxed max-w-3xl mx-auto mb-8"
+          >
+            Para cualquier consulta sobre adopción, voluntariado o donaciones,
+            contáctanos directamente:
+          </p>
+        </div>
+
+        <!-- Botones de contacto directo -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          <!-- Botón de Email -->
+          <a
+            href="mailto:eltuc.refugi@gmail.com?subject=Consulta%20desde%20la%20web&body=Hola,%0D%0A%0D%0AMe%20gustaría%20contactar%20con%20vosotros%20para:%0D%0A%0D%0A[Escribe%20tu%20mensaje%20aquí]%0D%0A%0D%0AGracias"
+            class="rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-center block"
+            style="background-color: #E8C8D4;"
+          >
+            <div class="text-5xl mb-4" style="color: #8A2451;">📧</div>
+            <h4
+              class="text-xl font-roboto-serif font-semibold text-gray-800 mb-3"
+            >
+              Enviar Email
+            </h4>
+            <p class="text-gray-700 font-roboto mb-4">
+              Escríbenos directamente a nuestro email
+            </p>
+            <div class="text-lg font-semibold" style="color: #8A2451;">
+              eltuc.refugi@gmail.com
+            </div>
+          </a>
+
+          <!-- Botón de Teléfono -->
+          <a
+            href="tel:687874795"
+            class="rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-center block"
+            style="background-color: #E8C8D4;"
+          >
+            <div class="text-5xl mb-4" style="color: #8A2451;">📞</div>
+            <h4
+              class="text-xl font-roboto-serif font-semibold text-gray-800 mb-3"
+            >
+              Llamar Ahora
+            </h4>
+            <p class="text-gray-700 font-roboto mb-4">
+              Llámanos directamente para consultas urgentes
+            </p>
+            <div class="text-lg font-semibold" style="color: #8A2451;">
+              687 874 795
+            </div>
+          </a>
+        </div>
+
+        <!-- Información sobre qué pueden consultar -->
+        <div
+          class="rounded-2xl p-8 shadow-lg text-center"
+          style="background: linear-gradient(135deg, #E8C8D4 0%, #F0D4E0 100%);"
+        >
+          <h4
+            class="text-2xl font-roboto-serif font-semibold mb-6"
+            style="color: #8A2451;"
+          >
+            ✨ ¿En qué podemos ayudarte?
+          </h4>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div class="p-4">
+              <div class="text-3xl mb-2">🐕</div>
+              <p class="text-sm font-roboto font-medium text-gray-700">
+                Adopciones
+              </p>
+            </div>
+            <div class="p-4">
+              <div class="text-3xl mb-2">💖</div>
+              <p class="text-sm font-roboto font-medium text-gray-700">
+                Voluntariado
+              </p>
+            </div>
+            <div class="p-4">
+              <div class="text-3xl mb-2">💰</div>
+              <p class="text-sm font-roboto font-medium text-gray-700">
+                Donaciones
+              </p>
+            </div>
+            <div class="p-4">
+              <div class="text-3xl mb-2">❓</div>
+              <p class="text-sm font-roboto font-medium text-gray-700">
+                Información general
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Información adicional -->
+      <div class="text-center mt-16">
+        <div
+          class="rounded-2xl p-8 shadow-lg"
+          style="background-color: #E8C8D4;"
+        >
+          <h3
+            class="text-2xl font-roboto-serif font-semibold mb-4"
+            style="color: #8A2451;"
+          >
+            💡 ¿Sabías que...?
+          </h3>
+          <p
+            class="text-gray-700 font-roboto leading-relaxed max-w-3xl mx-auto"
+          >
+            Estamos en el corazón de El Pont de Vilomara i Rocafort, Barcelona.
+            Nuestro refugio está abierto para visitas y siempre necesitamos
+            voluntarios que nos ayuden a cuidar de nuestros peludos amigos. ¡Ven
+            a conocernos!
+          </p>
+        </div>
+      </div>
+
+      <!-- Botón de regreso -->
+      <div class="text-center mt-12">
+        <a
+          href="/"
+          class="inline-flex items-center text-white font-roboto-serif font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+          style="background-color: #B85C7A;"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 mr-2"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+          Volver al inicio
+        </a>
+      </div>
     </div>
   </main>
 </Layout>

@@ -1,16 +1,242 @@
 ---
-
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout>
-	  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-	<div class="text-center mb-12">
-	  <h1 class="text-4xl font-bold text-gray-900 mb-4">Página Principal</h1>
-	  <p class="text-xl text-gray-600 max-w-3xl mx-auto">Yo soy la página principal</p>
-	</div>
+<Layout title="Refugio El Tuc - Asociación sin ánimo de lucro">
+  <main
+    class="min-h-screen relative overflow-hidden"
+    style="background: linear-gradient(135deg, #f8f4f6 0%, #f0e8ec 100%);"
+  >
+    <!-- Patitas decorativas de fondo -->
+    <div class="absolute inset-0 opacity-15 pointer-events-none">
+      <div
+        class="absolute top-10 left-10 text-9xl transform rotate-12"
+        style="color: #8A2451;"
+      >
+        🐾
+      </div>
+      <div
+        class="absolute top-32 right-20 text-7xl transform -rotate-12"
+        style="color: #B85C7A;"
+      >
+        🐾
+      </div>
+      <div
+        class="absolute top-64 left-1/4 text-8xl transform rotate-45"
+        style="color: #8A2451;"
+      >
+        🐾
+      </div>
+      <div
+        class="absolute bottom-32 right-10 text-9xl transform -rotate-45"
+        style="color: #B85C7A;"
+      >
+        🐾
+      </div>
+      <div
+        class="absolute bottom-64 left-16 text-7xl transform rotate-12"
+        style="color: #8A2451;"
+      >
+        🐾
+      </div>
+      <div
+        class="absolute top-1/2 right-1/3 text-6xl transform -rotate-12"
+        style="color: #B85C7A;"
+      >
+        🐾
+      </div>
+      <div
+        class="absolute top-20 left-1/2 text-8xl transform rotate-30"
+        style="color: #D4849A;"
+      >
+        🐾
+      </div>
+      <div
+        class="absolute bottom-20 left-1/3 text-7xl transform -rotate-30"
+        style="color: #8A2451;"
+      >
+        🐾
+      </div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <!-- Sección principal con imagen y título -->
+      <div class="text-center mb-16">
+        <div
+          class="flex flex-col lg:flex-row items-center justify-center gap-12 mb-8"
+        >
+          <!-- Imagen principal -->
+          <div class="flex-shrink-0">
+            <img
+              src="https://placehold.co/300x300/f3e8ff/8b5cf6?text=🐕+🐱"
+              alt="Cachorro en manos protectoras"
+              class="w-64 h-64 lg:w-80 lg:h-80 rounded-3xl object-cover shadow-2xl border-4 border-white"
+            />
+          </div>
+
+          <!-- Título y descripción -->
+          <div class="text-center lg:text-left max-w-lg">
+            <h1
+              class="text-5xl lg:text-6xl font-roboto-serif font-bold text-gray-800 mb-6"
+            >
+              Refugi <span class="font-semibold italic" style="color: #8A2451;"
+                >El Tuc</span
+              >
+            </h1>
+            <p
+              class="text-lg lg:text-xl text-gray-700 leading-relaxed font-roboto"
+            >
+              Som una associació sense ànim de lucre i ens dediquem a l'acollida
+              de gossos abandonats dins el municipi del Pont de Vilomara i
+              Rocafort.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tres secciones principales -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <!-- EL NOSTRE OBJECTIU -->
+        <div
+          class="rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+          style="background-color: #E8C8D4;"
+        >
+          <h3
+            class="text-xl font-roboto-serif font-semibold text-gray-800 mb-4 text-center"
+          >
+            EL NOSTRE OBJECTIU
+          </h3>
+          <p class="text-gray-700 text-center leading-relaxed font-roboto">
+            Promoure l'adopció dels animals sense llar i trobar una família que
+            els estimi, a més de cobrir totes les seves necessitats
+            veterinàries, d'higiene i fer que se sentin el màxim acollits i
+            feliços.
+          </p>
+        </div>
+
+        <!-- VOLUNTARIAT -->
+        <div
+          class="rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+          style="background-color: #E8C8D4;"
+        >
+          <h3
+            class="text-xl font-roboto-serif font-semibold text-gray-800 mb-4 text-center"
+          >
+            VOLUNTARIAT
+          </h3>
+          <p class="text-gray-700 text-center leading-relaxed font-roboto">
+            Sempre necessitem l'ajuda de qualsevol persona que vulgui
+            col·laborar amb nosaltres, ja sigui venint a passejar els gossos,
+            ajudant en el manteniment de les instal·lacions o participant en els
+            esdeveniments per recollectar diners.
+          </p>
+        </div>
+
+        <!-- OPCIONS DE SUPORT -->
+        <div
+          class="rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+          style="background-color: #E8C8D4;"
+        >
+          <h3
+            class="text-xl font-roboto-serif font-semibold text-gray-800 mb-4 text-center"
+          >
+            OPCIONS DE SUPORT
+          </h3>
+          <p class="text-gray-700 text-center leading-relaxed font-roboto">
+            Impulsen el voluntariat, les adopcions, el teaming (1 €/ mes) i les
+            donacions per mantenir el refugi i ajudar els gossos abandonats del
+            municipi de Pont de Vilomara i Rocafort.
+          </p>
+        </div>
+      </div>
+
+      <!-- Sección ENS VOLS AJUDAR? -->
+      <div class="text-center mb-12">
+        <h2
+          class="text-4xl lg:text-5xl font-roboto-serif font-bold mb-12"
+          style="color: #8A2451;"
+        >
+          ENS VOLS AJUDAR?
+        </h2>
+
+        <!-- Banner con iconos -->
+        <div
+          class="rounded-2xl p-8 shadow-xl"
+          style="background: linear-gradient(90deg, #8A2451 0%, #B85C7A 100%);"
+        >
+          <div
+            class="grid grid-cols-2 md:grid-cols-5 gap-6 items-center text-white"
+          >
+            <!-- Adopta un pelut -->
+            <div class="text-center">
+              <div class="text-4xl mb-2">🐕</div>
+              <p class="font-roboto font-medium text-sm">
+                Adopta<br />un pelut
+              </p>
+            </div>
+
+            <!-- Fes-te Voluntari -->
+            <div class="text-center">
+              <div class="text-4xl mb-2">💖</div>
+              <p class="font-roboto font-medium text-sm">
+                Fes-te<br />Voluntari
+              </p>
+            </div>
+
+            <!-- Col·labora amb nosaltres -->
+            <div class="text-center">
+              <div class="text-4xl mb-2">🤝</div>
+              <p class="font-roboto font-medium text-sm">
+                Col·labora<br />amb nosaltres
+              </p>
+            </div>
+
+            <!-- Feste teamer -->
+            <div class="text-center">
+              <div class="text-4xl mb-2">💰</div>
+              <p class="font-roboto font-medium text-sm">
+                Fes-te teamer<br />per 1€ al mes
+              </p>
+            </div>
+
+            <!-- Fes una donació -->
+            <div class="text-center">
+              <div class="text-4xl mb-2">🏦</div>
+              <p class="font-roboto font-medium text-sm">
+                Fes una donació (Banc Sabadell)<br />
+                ES57 0081 0179 6900 0140 3948
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botones de acción -->
+      <div
+        class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12"
+      >
+        <a
+          href="/adopta"
+          class="text-white font-roboto-serif font-semibold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+          style="background-color: #8A2451; hover:background-color: #6D1D40;"
+        >
+          🐾 Veure animals en adopció
+        </a>
+        <a
+          href="/colabora"
+          class="text-white font-roboto-serif font-semibold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+          style="background-color: #B85C7A; hover:background-color: #A04A6B;"
+        >
+          💖 Com puc ajudar
+        </a>
+        <a
+          href="/contacto"
+          class="text-white font-roboto-serif font-semibold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+          style="background-color: #D4849A; hover:background-color: #C2728A;"
+        >
+          📞 Contacta'ns
+        </a>
+      </div>
+    </div>
   </main>
 </Layout>
