@@ -7,9 +7,9 @@
   style="background: linear-gradient(135deg, #E8C8D4 0%, #4A1A2E 50%, #1a1a1a 100%);"
 >
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
       <!-- Logo y About -->
-      <div class="md:col-span-2">
+      <div class="sm:col-span-2 md:col-span-2">
         <div class="flex items-center mb-4">
           <img
             src="/LogoRefugiElTuc.png"
@@ -28,7 +28,7 @@
       </div>
 
       <!-- Contacto -->
-      <div>
+      <div class="md:col-span-1">
         <h3 class="text-lg font-roboto-serif font-semibold mb-4 text-white">
           Contacte
         </h3>
@@ -63,11 +63,12 @@
       </div>
 
       <!-- Enlaces -->
-      <div>
+      <div class="md:col-span-1">
         <h3 class="text-lg font-roboto-serif font-semibold mb-4 text-white">
           Enllaços
         </h3>
-        <ul class="text-white space-y-2 font-roboto">
+        <!-- Enlaces en lista horizontal para móvil, vertical para desktop -->
+        <ul class="text-white font-roboto flex flex-wrap gap-x-4 gap-y-2 md:flex-col md:space-y-2 md:gap-x-0">
           <li>
             <a
               href="/adopta"
